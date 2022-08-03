@@ -1,0 +1,43 @@
+[
+    {
+        "firstname": "Yannick",
+        "lastname": "Schuurman",
+        "age": "25",
+        "telephoneNumber": "06-83659544",
+        "company": "Bedrijf B.V.",
+        "email": "yannick.schuurman@hotmail.com",
+        "leadDate": "01-04-2020",
+        "leadSource": "Website",
+        "gender": "Man",
+        "address": {
+            "streetname": "Terwoldseweg",
+            "housenumber": "2",
+            "zipcode": "7391TC",
+            "City": "Twello",
+            "country": "Nederland"
+        },
+        "function": "Commercieel manager",
+        "lastcontacted": "15-12-2021",
+        "nextcontactmoment": "15-04-2022",
+        "recentactivities": [
+            {
+                "type": "call",
+                "date": "01-05-2021",
+                "time": "12:13",
+                "statusCall": "incoming",
+                "user": "Angelique van Aalderen"
+            },
+            {
+                "type": "note",
+                "date": "22-04-2021",
+                "time": "14:22",
+                "user": "Johannes Romein"
+            }
+        ]
+    },
+    {
+        "firstname": "Youri",
+        "lastname": "Schuurman",
+        "age": "21"
+    }
+]
