@@ -1,7 +1,136 @@
 <script setup lang="ts">
     import users from "../../../public/dummyclients.json";
-
+    import Menubar from "primevue/menubar";
     import { onMounted, ref, watch, computed, reactive } from "vue";
+
+    const menu = ref([
+        {
+
+        }
+    ])
+    const items = ref([
+        {
+            label: "File",
+            icon: "pi pi-fw pi-file",
+            items: [
+                {
+                    label: "New",
+                    icon: "pi pi-fw pi-plus",
+                    items: [
+                        {
+                            label: "Bookmark",
+                            icon: "pi pi-fw pi-bookmark",
+                        },
+                        {
+                            label: "Video",
+                            icon: "pi pi-fw pi-video",
+                        },
+                    ],
+                },
+                {
+                    label: "Delete",
+                    icon: "pi pi-fw pi-trash",
+                },
+                {
+                    separator: true,
+                },
+                {
+                    label: "Export",
+                    icon: "pi pi-fw pi-external-link",
+                },
+            ],
+        },
+        {
+            label: "Edit",
+            icon: "pi pi-fw pi-pencil",
+            items: [
+                {
+                    label: "Left",
+                    icon: "pi pi-fw pi-align-left",
+                },
+                {
+                    label: "Right",
+                    icon: "pi pi-fw pi-align-right",
+                },
+                {
+                    label: "Center",
+                    icon: "pi pi-fw pi-align-center",
+                },
+                {
+                    label: "Justify",
+                    icon: "pi pi-fw pi-align-justify",
+                },
+            ],
+        },
+        {
+            label: "Users",
+            icon: "pi pi-fw pi-user",
+            items: [
+                {
+                    label: "New",
+                    icon: "pi pi-fw pi-user-plus",
+                },
+                {
+                    label: "Delete",
+                    icon: "pi pi-fw pi-user-minus",
+                },
+                {
+                    label: "Search",
+                    icon: "pi pi-fw pi-users",
+                    items: [
+                        {
+                            label: "Filter",
+                            icon: "pi pi-fw pi-filter",
+                            items: [
+                                {
+                                    label: "Print",
+                                    icon: "pi pi-fw pi-print",
+                                },
+                            ],
+                        },
+                        {
+                            icon: "pi pi-fw pi-bars",
+                            label: "List",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            label: "Events",
+            icon: "pi pi-fw pi-calendar",
+            items: [
+                {
+                    label: "Edit",
+                    icon: "pi pi-fw pi-pencil",
+                    items: [
+                        {
+                            label: "Save",
+                            icon: "pi pi-fw pi-calendar-plus",
+                        },
+                        {
+                            label: "Delete",
+                            icon: "pi pi-fw pi-calendar-minus",
+                        },
+                    ],
+                },
+                {
+                    label: "Archieve",
+                    icon: "pi pi-fw pi-calendar-times",
+                    items: [
+                        {
+                            label: "Remove",
+                            icon: "pi pi-fw pi-calendar-minus",
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            label: "Quit",
+            icon: "pi pi-fw pi-power-off",
+        },
+    ]);
 
     let data = reactive({
         clients: [],
@@ -27,176 +156,41 @@
 </script>
 
 <template>
-    <div class="topbar">
-        <div class="topbar--abovesidebar">
-            <button
-                class="menu darkedhover"
-                onclick="this.classList.toggle('opened');this.setAttribute('aria-expanded', this.classList.contains('opened'))"
-                aria-label="Main Menu">
-                <svg width="35" height="35" viewBox="0 0 100 100">
-                    <path
-                        class="line line1"
-                        d="M 20,29.000046 H 80.000231 C 80.000231,29.000046 94.498839,28.817352 94.532987,66.711331 94.543142,77.980673 90.966081,81.670246 85.259173,81.668997 79.552261,81.667751 75.000211,74.999942 75.000211,74.999942 L 25.000021,25.000058" />
-                    <path class="line line2" d="M 20,50 H 80" />
-                    <path
-                        class="line line3"
-                        d="M 20,70.999954 H 80.000231 C 80.000231,70.999954 94.498839,71.182648 94.532987,33.288669 94.543142,22.019327 90.966081,18.329754 85.259173,18.331003 79.552261,18.332249 75.000211,25.000058 75.000211,25.000058 L 25.000021,74.999942" />
-                </svg>
-            </button>
-            <div class="topbar--logo darkedhover">
-                <i class="fa-solid fa-network-wired"></i>
-                <p style="display: inline; padding-left: 5px">
-                    My<strong>CRM</strong>
-                </p>
-            </div>
-        </div>
-        <div class="topbar--right-content-container">
-            <div class="topbar--searchbar">
-                <input
-                    type="text"
-                    v-model="search"
-                    placeholder="Zoeken naar klanten" />
-            </div>
-            <div v-if="data.clients.length" class="topbar--searchbar--results">
-                <p v-for="client in data.clients">
-                    {{ client.firstname }}
-                </p>
-            </div>
-            <div style="display: flex">
-                <div class="topbar__block">
-                    <i class="fa-solid fa-bell"></i>
-                </div>
-                <div class="notification topbar__block">
-                    <i class="fa-solid fa-circle-info"></i>
-                </div>
-                <div class="topbar__block">
-                    <img
-                        class="user-profile-photo"
-                        src="../../../public/user-profile-yannick.png"
-                        alt="Afbeelding gebruiker" />
-                </div>
-            </div>
-        </div>
-    </div>
+    <Menubar :model="items">
+        <template #start>
+            <img
+                alt="logo"
+                src="../../assets/logo.png"
+                height="40"
+                class="mr-2"
+            />
+        </template>
+        <template #end>
+            <InputText placeholder="Search" type="text" />
+            <Avatar icon="pi pi-user" class="mr-2" />
+        </template>
+    </Menubar>
 </template>
 
 <style lang="scss">
-    @import "src/styling/themeColors";
+.p-menubar {
+    border: none !important;
+}
+    .p-menubar-start {
+        width: $leftSideBarOpenWidth;
+        padding-left: 20px;
 
-    .menu {
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-        width: 50px;
-    }
-    .line {
-        fill: none;
-        stroke: white;
-        stroke-width: 6;
-        transition: stroke-dasharray 400ms cubic-bezier(0.4, 0, 0.2, 1),
-            stroke-dashoffset 400ms cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .line1 {
-        stroke-dasharray: 60 207;
-        stroke-width: 6;
-    }
-    .line2 {
-        stroke-dasharray: 60 60;
-        stroke-width: 6;
-    }
-    .line3 {
-        stroke-dasharray: 60 207;
-        stroke-width: 6;
-    }
-    .opened .line1 {
-        stroke-dasharray: 90 207;
-        stroke-dashoffset: -134;
-        stroke-width: 6;
-    }
-    .opened .line2 {
-        stroke-dasharray: 1 60;
-        stroke-dashoffset: -30;
-        stroke-width: 6;
-    }
-    .opened .line3 {
-        stroke-dasharray: 90 207;
-        stroke-dashoffset: -134;
-        stroke-width: 6;
-    }
-
-    .topbar {
-        display: flex;
-        height: $topbar-height;
-        background-color: $home-color;
-        font-family: "Quicksand", sans-serif;
-        color: white;
-        font-size: 20px;
-        justify-content: space-between;
-
-        &--abovesidebar {
-            display: flex;
-            width: $sidebar-width;
+        &:after {
+            content: "CRM YS";
         }
+    }
 
-        &--searchbar {
-            line-height: 2.5rem;
-            margin-left: 1rem;
+    .p-avatar {
+        margin-left: 20px;
+        margin-right: 10px;
 
-            &--results {
-                height: fit-content;
-                background-color: white;
-                position: absolute;
-                left: 15px;
-                top: 35px;
-                z-index: 5;
-                padding: 0.5rem;
-                width: 200px;
-                border: 1px solid #726c6c;
-                color: $dark-grey;
-                font-size: 14px;
-            }
-
-            input {
-                padding: 0.5rem;
-                font-size: 12px;
-                width: 200px;
-                border: none;
-                border-radius: 5px;
-            }
-        }
-
-        &--logo {
+        &:hover {
             cursor: pointer;
-            height: $topbar-height;
-            line-height: $topbar-height;
-            padding: 0px 1rem;
-            width: 100%;
-            text-align: center;
-        }
-
-        &__block {
-            line-height: $topbar-height;
-            cursor: pointer;
-            width: 50px;
-            text-align: center;
-
-            &:hover {
-                background-color: $home-color-darken;
-            }
-        }
-
-        &--right-content-container {
-            display: flex;
-            justify-content: space-between;
-            width: calc(100% - $sidebar-width);
-            position: relative;
-        }
-
-        .user-profile-photo {
-            border-radius: 50%;
-            width: 40px;
-            line-height: $topbar-height;
-            padding: 0.3rem;
         }
     }
 </style>

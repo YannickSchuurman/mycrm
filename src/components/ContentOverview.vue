@@ -1,19 +1,30 @@
 <template>
-    <div class="rightcontent">
-        <ClientOverview />
+    <div
+        class="rightcontent"
+        :class="[sideBarStatusOpen ? 'rightcontent--sharedview' : 'rightcontent--fullview']"
+    >
+        <router-view style="padding: 25px 45px;"></router-view>
     </div>
 </template>
 
 <script setup lang="ts">
-    import ClientOverview from "./clients/ClientOverview.vue";
+const props = defineProps(['sideBarStatusOpen'])
 </script>
 
 <style lang="scss">
     .rightcontent {
-        width: calc(100% - $sidebar-width);
+        width: calc(100% - $leftSideBarOpenWidth);
         position: fixed;
         right: 0px;
-        background-color: $ultra-light-grey;
+        background-color: #fbfbfb;
         height: 100%;
+
+        &--fullview {
+            width: calc(100% - #{$leftSideBarClosedWidth});
+        }
+
+        &--sharedview {
+            width: calc(100% - #{$leftSideBarOpenWidth});
+        }
     }
 </style>

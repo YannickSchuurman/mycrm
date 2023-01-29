@@ -1,51 +1,67 @@
 .sidebar {
-    width: $sidebar-width;
+    width: $leftSideBarOpenWidth;
     height: 100%;
-    box-shadow: 1px 0px #cac1c1;
     position: fixed;
-    font-family: "Quicksand", sans-serif;
+    left: -226px;
+    border-right: 1px solid #cac1c1;
     z-index: 1;
-    background-color: $ultra-light-grey;
+    background-color: #081f4b;
+    transition: left 0.5s;
+    border-top: 1px solid #cac1c1;
+    color: white;
 
-    &--user-container {
-        text-align: center;
-        padding: 10px;
+    &-content {
+        margin: 10px 15px;
     }
 
-    &--profile-photo {
-        width: 60px;
-        border-radius: 50%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        padding: 10px 0px;
+    // Override Primevue default style
+    &-divider:before {
+        border-top:1px solid $home-color-light !important;
     }
 
-    ul {
-        list-style: none;
-        margin: 0px;
-        padding: 0px;
+    &-search {
+        background-color: $home-color-light !important;
+        border: none !important;
     }
 
-    &--menuItem {
-        padding: 10px 25px;
-        height: 25px;
-        line-height: 25px;
-        cursor: pointer;
-        border-bottom: 1px solid $light-grey;
+    &.open {
+        left: 0px;
 
-        p {
-            margin: unset;
+        & .sidebar-content {
+            opacity: 1;
+            overflow: hidden;
         }
+    }
+
+    &.pinned {
+        left: 0px;
+        opacity: 1;
+
+        & .sidebar-content {
+            opacity: 1;
+        }
+    }
+
+    & .toggleLeftSideBar {
+        width: 2.2rem;
+        height: 2.2rem;
+        position: absolute;
+        background-color: white;
+        border-radius: 50%;
+        color: grey;
+        vertical-align: center;
+        text-align: center;
+        padding-top: 0.4rem;
+        right: -1.2rem;
+        top: 3.5rem;
+        z-index: 6;
+        border: 0.1rem solid #b2b2b2;
+        cursor: pointer;
 
         &:hover {
-            background-color: $light-grey;
+            color: white;
+            background-color: #0183ff;
+            transition: background-color 0.3s;
         }
-    }
-
-    .active {
-        background-color: $home-color-light;
-        color: white;
-        border-left: 7px solid $home-color;
     }
 }

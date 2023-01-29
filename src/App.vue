@@ -14,7 +14,5 @@
     }
     p {
         margin: 0px;
-
-        font-size: 14px;
     }
 </style>

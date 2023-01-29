@@ -1,0 +1,22 @@
+[
+    {
+        "name": "Yannick Schuurman",
+        "favorite": true,
+        "id": 45
+    },
+    {
+        "name": "John Bever",
+        "favorite": true,
+        "id": 4
+    },
+    {
+        "name": "Henk Janssen",
+        "favorite": false,
+        "id": 1
+    },
+    {
+        "name": "Berend Bele",
+        "favorite": false,
+        "id": 5
+    }
+]
